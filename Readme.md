@@ -19,9 +19,10 @@ $ pip install -r requirements.txt --user
 
 Checkout the help:
 ```sh-session
-$ python ./main.py -h
+$ python ./main.py --color proxy -h                            
 usage: main.py [-h] [--width WIDTH] [--height HEIGHT] [--color {random,proxy}]
-               [--color-distance COLOR_DISTANCE] [--output OUTPUT]
+               [--color-distance COLOR_DISTANCE]
+               [--color-random-seed COLOR_RANDOM_SEED] [--output OUTPUT]
 
 A generator in the style of Gerhard Richter's Strip.
 
@@ -33,6 +34,8 @@ optional arguments:
                         Color generator
   --color-distance COLOR_DISTANCE
                         Color distance (0 - 255) if --color is `proxy`
+  --color-random-seed COLOR_RANDOM_SEED
+                        Random seed for color generator
   --output OUTPUT       File name to generate
 ```
 
@@ -57,3 +60,15 @@ $ python ./main.py --color proxy --color-distance 10
 ```
 
 ![Proxy-color](./static-content/proxy.png)
+
+### Control randomness
+
+If you find a pattern you really like you can regenerate it. 
+
+A seed for the randomness can be specified to always get the same pattern:
+
+```sh-session
+$ python ./main.py --color proxy --color-random-seed 42
+```
+
+![Seed-color](./static-content/seed.png)

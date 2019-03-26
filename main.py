@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw
 import argparse
 from color_generator import *
+import time
 
 # Parse arguments
 cli_args = argparse.ArgumentParser(
@@ -29,6 +30,12 @@ cli_args.add_argument(
     default=10,
     type=int,
 )
+cli_args.add_argument(
+    "--color-random-seed",
+    help="Random seed for color generator",
+    default=int(time.time()),
+    type=int,
+)
 
 # Output
 cli_args.add_argument("--output", help="File name to generate", default="output.png")
@@ -47,6 +54,8 @@ if color_generator == "random":
 elif color_generator == "proxy":
     color_generator = gen_proxy
 color_distance = cli.color_distance
+print("Using random seed: {}".format(cli.color_random_seed))
+random.seed(cli.color_random_seed)
 
 # Output
 output_file = cli.output
@@ -55,11 +64,11 @@ output_file = cli.output
 im = Image.new("RGBA", (width, height), (255, 255, 255, 255))
 draw = ImageDraw.Draw(im)
 
-# lines rectangles
+# Generate lines
 color = gen_random({})
 for x in range(height):
     color = color_generator({"color": color, "distance": color_distance})
     draw.rectangle([0, x, width, x], fill=color, outline=color)
 
-# save image
+# Save image
 im.save(output_file)
