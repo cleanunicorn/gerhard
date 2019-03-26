@@ -50,7 +50,7 @@ $ python ./main.py
 
 ### Proxy mode
 
-Starts from a random color and generates the next line below no furthen than the distance specified.
+Starts from a random color and the next line is a close color.
 
 ```sh-session
 $ python ./main.py --color proxy --color-distance 10
