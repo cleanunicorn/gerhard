@@ -37,6 +37,15 @@ cli_args.add_argument(
     type=int,
 )
 
+# Draw type
+cli_args.add_argument(
+    "--method",
+    help="Method to generate",
+    default="line",
+    type=str,
+    choices=["line", "spiral"]
+)
+
 # Output
 cli_args.add_argument("--output", help="File name to generate", default="output.png")
 
@@ -64,11 +73,46 @@ output_file = cli.output
 im = Image.new("RGBA", (width, height), (255, 255, 255, 255))
 draw = ImageDraw.Draw(im)
 
-# Generate lines
 color = gen_random({})
-for x in range(height):
-    color = color_generator({"color": color, "distance": color_distance})
-    draw.rectangle([0, x, width, x], fill=color, outline=color)
+# Generate lines
+if cli.method == "line":
+    for x in range(height):
+        color = color_generator({"color": color, "distance": color_distance})
+        draw.rectangle([0, x, width, x], fill=color, outline=color)
+elif cli.method == "spiral":
+    done = False
+    x = int(width / 2)
+    y = int(height / 2)
+    min_x, max_x = x, x
+    min_y, max_y = y, y
+    direction = 0
+    while done == False:
+        color = color_generator({"color": color, "distance": color_distance})
+        draw.point([(x, y)], color)
+        # Move
+        if direction == 0:
+            x += 1
+            if x > max_x:
+                direction += 1
+                max_x = x
+        elif direction == 1:
+            y += 1
+            if y > max_y:
+                direction += 1
+                max_y = y
+        elif direction == 2:
+            x -= 1
+            if x < min_x:
+                direction += 1
+                min_x = x
+        elif direction == 3:
+            y -= 1
+            if y < min_y:
+                direction += 1
+                min_y = y
+        direction = direction % 4
+        if x < 0 or y < 0 or x > width or y > height:
+            done = True
 
 # Save image
 im.save(output_file)
