@@ -41,5 +41,15 @@
                 "--color=proxy",
             ]
         },
+        {
+            "name": "CLI click",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/gerhard/main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "lines",
+            ]
+        },
     ]
 }
