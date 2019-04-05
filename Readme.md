@@ -66,7 +66,7 @@ $ python ./main.py --color proxy --color-distance 10
 Starts for a random color in the middle of the image and draws a spiral with a proxy color.
 
 ```sh-session
-main.py --width=600 --height=600 --color-distance=1 --method=spiral
+python main.py --width=600 --height=600 --color-distance=1 --method=spiral
 ```
 
 ![Spiral](./static-content/spiral.png)
