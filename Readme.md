@@ -41,7 +41,7 @@ optional arguments:
 
 ## Run
 
-### Default mode
+### Gerhard method
 
 Simple output generates a 1920 x 1080 PNG image saved as `output.png` that imitates the original art.
 
@@ -51,7 +51,7 @@ $ python ./main.py
 
 ![Default-settings](./static-content/default.png)
 
-### Proxy mode
+### Gerhard method, proxy color
 
 Starts from a random color and the next line is a close color.
 
@@ -59,7 +59,17 @@ Starts from a random color and the next line is a close color.
 $ python ./main.py --color proxy --color-distance 10
 ```
 
-![Proxy-color](./static-content/proxy.png)
+![Proxy-color](./static-content/gerhard-proxy.png)
+
+### Spiral method
+
+Starts for a random color in the middle of the image and draws a spiral with a proxy color.
+
+```sh-session
+main.py --width=600 --height=600 --color-distance=1 --method=spiral
+```
+
+![Spiral](./static-content/spiral.png)
 
 ### Control randomness
 
@@ -71,4 +81,4 @@ A seed for the randomness can be specified to always get the same pattern:
 $ python ./main.py --color proxy --color-random-seed 42
 ```
 
-![Seed-color](./static-content/seed.png)
+![Seed-color](./static-content/gerhard-seed.png)
