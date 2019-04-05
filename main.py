@@ -80,6 +80,8 @@ if cli.method == "line":
         color = color_generator({"color": color, "distance": color_distance})
         draw.rectangle([0, x, width, x], fill=color, outline=color)
 elif cli.method == "spiral":
+    # Color generator set to proxy
+    color_generator = gen_proxy
     done = False
     x = int(width / 2)
     y = int(height / 2)
