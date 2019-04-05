@@ -43,7 +43,7 @@ cli_args.add_argument(
     help="Method to generate",
     default="line",
     type=str,
-    choices=["line", "spiral"]
+    choices=["line", "spiral"],
 )
 
 # Output
